@@ -19,7 +19,7 @@ class Solution:
                 r = mid - 1
                 
             elif mid < r and nums[mid + 1] > nums[mid]:
-                # right is higher, we can go left
+                # right is higher, we can go right
                 l = mid + 1
                 
             else:
