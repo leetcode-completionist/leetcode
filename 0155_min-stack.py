@@ -1,39 +1,28 @@
-import itertools
-import heapq
-
 class MinStack:
-
-    INVALID_UID = -1
     
     def __init__(self):
         self.stack = []
-        self.heap = []
-        self.counter = itertools.count()
+        self.min_stack = []
 
 
     def push(self, val: int) -> None:
-        node = [val, next(self.counter)]
-        self.stack.append(node)
-        heapq.heappush(self.heap, node)
-        
+        self.stack.append(val)
+        if not self.min_stack:
+            self.min_stack.append(val)
+        else:
+            self.min_stack.append(min(self.min_stack[-1], val))
 
     def pop(self) -> None:
-        node = self.stack.pop()
-        node[-1] = MinStack.INVALID_UID        
+        self.stack.pop()
+        self.min_stack.pop()
         
 
     def top(self) -> int:
-        return self.stack[-1][0]
+        return self.stack[-1]
         
 
     def getMin(self) -> int:
-        while self.heap:
-            if self.heap[0][-1] == MinStack.INVALID_UID:
-                heapq.heappop(self.heap)
-            else:
-                break
-        
-        return self.heap[0][0]
+        return self.min_stack[-1]
 
 
 # Your MinStack object will be instantiated and called as such:
