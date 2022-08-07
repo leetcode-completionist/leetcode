@@ -55,5 +55,6 @@ class Solution:
             for j in range(num_of_vowels):
                 for preceding_char in Solution.VALID_PRECEDING_CHARS[j]:
                     dp[i][j] += dp[i-1][preceding_char]
+                dp[i][j] = dp[i][j] % (10**9 + 7)
                 
         return sum(dp[-1]) % (10**9 + 7)
