@@ -21,7 +21,7 @@ class Solution:
 
     The question only cares about the number of ways to build a valid string.
     So we can modify the DP table to contain ints instead.
-    sum(dp[n]) will be the total number of strings at n.
+    sum(dp[n-1]) will be the total number of strings at n.
 
                         0        1        2        3        4
                        'a',     'e',     'i',     'o',     'u'
