@@ -5,11 +5,10 @@ class Solution:
         
         if numerator == denominator:
             return "1"
-        
-        is_positive = (numerator < 0) == (denominator < 0)
-        
+                
         res = ""
-        if not is_positive:
+        if not (numerator < 0) == (denominator < 0):
+            # check if end result will be negative or positive
             res += "-"
         
         dividend = abs(numerator)
