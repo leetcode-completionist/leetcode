@@ -29,7 +29,9 @@ class Solution:
         rev = s[::-1]
         
         # add it to the end of the input for a guaranteed palindrome
-        pattern = s + rev
+        # we add a delimiter to prevent KMP from matching a prefix that
+        # spans beyond the initial input
+        pattern = s + "#" + rev
         
         # but we want to see how many letters we can remove from rev
         # to minimize our transformation.
