@@ -35,13 +35,12 @@ class Trie:
         
         When a word is found, we will perform the following actions:
         
-        - Flip the word node's "is_word" to False
+        - Set the word node's "word" to None
 
-        - If the current word node's child_count is 0, we will
-          traverse up node's parent and "evict" the child (and
-          reduce the parent's child_count). We will recursively
-          perform this check until we reach a node who's child_count
-          is not zero OR we are at the root
+        - If the current word node's child count is 0, we will
+          traverse up node's parent and "evict" the child. We will
+          perform this check up to trie until we reach a node who's child
+          count is not zero OR we are at the root
           
         The reason why we do this is because we only need to match
         a word once. So we will improve subsequent word searches by
