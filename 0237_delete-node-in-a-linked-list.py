@@ -11,12 +11,8 @@ class Solution:
         :type node: ListNode
         :rtype: void Do not return anything, modify node in-place instead.
         """
-        # shift all subsequent values forward by one
-        prev = None
-        while node.next:
-            node.val = node.next.val
-            prev = node
-            node = node.next
+        # copy next node value into current node
+        node.val = node.next.val
         
-        # then delete the last node
-        prev.next = None
+        # delete next node instead
+        node.next = node.next.next
