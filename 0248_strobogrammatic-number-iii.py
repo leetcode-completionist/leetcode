@@ -11,10 +11,10 @@ class Solution:
             if i == 1:
                 nums = ["0", "1", "8"]
                 if low_n == 1:
-                    nums = filter(lambda num: num >= low, nums)
+                    nums = list(filter(lambda num: num >= low, nums))
                 if high_n == 1:
-                    nums = filter(lambda num: num <= high, nums)
-                return list(nums)
+                    nums = list(filter(lambda num: num <= high, nums))
+                return nums
             
             if i == 2:
                 nums = ["00", "11", "69", "88", "96"]
@@ -22,17 +22,21 @@ class Solution:
                     # we don't use zeroes at the top level
                     nums = nums[1:]
                 if low_n == 2:
-                    nums = filter(lambda num: int(num) >= int_low, nums)
+                    nums = list(filter(lambda num: int(num) >= int_low, nums))
                 if high_n == 2:
-                    nums = filter(lambda num: int(num) <= int_high, nums)
-                return list(nums)
+                    nums = list(filter(lambda num: int(num) <= int_high, nums))
+                return nums
 
             res = []
             
             pairs = ["00", "11", "69", "88", "96"]
-            if i == n:
+            if n == i:
                 # we don't use zeroes at the top level
                 pairs = pairs[1:]
+            if low_n == i:
+                pairs = list(filter(lambda num: num[0] >= low[0], pairs))
+            if high_n == i:
+                pairs = list(filter(lambda num: num[0] <= high[0], pairs))
             
             middle = find(i - 2, n)
             
@@ -59,9 +63,9 @@ class Solution:
             
             return res
         
-        res = []
+        res = 0
         
         for n in range(low_n, high_n + 1):
-            res += find(n, n)
+            res += len(find(n, n))
         
-        return len(res)
+        return res
