@@ -23,9 +23,8 @@ class Solution:
             if c in "+-*":
                 left = self.diffWaysToCompute(expression[:i])
                 right = self.diffWaysToCompute(expression[i+1:])
-                op = expression[i]
                 for l in left:
                     for r in right:
-                        res.append(self.evaluate(l, r, op))
+                        res.append(self.evaluate(l, r, c))
         
         return res
