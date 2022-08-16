@@ -10,14 +10,6 @@ class Solution:
             return Solution.SINGLES
         
         def find(i: int) -> List[str]:
-            # This function also includes "zero" strobogrammatic
-            # numbers (i.e. 00, 000, 010, 00800, etc)
-            #
-            # We do this because the results will get used by a
-            # higher level call (i.e. n + 2)
-            #
-            # It is up to the caller of the function to filter
-            # out invalid numbers due to leading zeroes.
             if i == 1:
                 # base case
                 return Solution.SINGLES
