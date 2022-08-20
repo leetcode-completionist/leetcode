@@ -62,8 +62,7 @@ class Solution:
                         
                     if out not in in_degree or not in_degree[out]:
                         # if no more requirement
-                        # remove from in_degree and queue
-                        # up char for BFS
+                        # queue up char for BFS
                         q.append(out)
         
         # return the result iff it contains all unique chars        
