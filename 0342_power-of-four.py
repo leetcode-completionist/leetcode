@@ -7,7 +7,7 @@ class Solution:
         # if n is a power of four, then it would
         # satisfy the following:
         #
-        #   n = 4^x, where n is an integer
+        #   n = 4^x, where x is an integer
         #
         # we can rearrange the terms using the log function
         #
