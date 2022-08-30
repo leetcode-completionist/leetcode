@@ -22,28 +22,22 @@ class Solution:
         
         visited = set()
         
-        heap = [(self.distance(start, dest), 0, start[0], start[1])]
+        heap = [(self.distance(start, dest), 0, start)]
         
         while heap:
-            _, dist, row, col = heapq.heappop(heap)
+            _, dist, coordinate = heapq.heappop(heap)
             
-            if (row, col) == dest:
-                # we reached our destination, return the distance
-                # directly since Dijkstra's algorithm guarantees
-                # nodes appearing in shortest distance ordering.
+            if coordinate == dest:
                 return dist
             
-            if (row, col) in visited:
-                # we've previously reached this location
-                # with Dijkstra's, it is guaranteed that we
-                # found a shorter distance to the location previously
+            if coordinate in visited:
                 continue
             
-            visited.add((row, col))
+            visited.add(coordinate)
 
             # go all four directions
             for direction in directions:
-                i, j = row, col
+                i, j = coordinate
                 new_dist = 0
 
                 # keep going until we hit a wall
@@ -61,7 +55,7 @@ class Solution:
                 # score of dist to dest and next_dist.
                 heuristic = self.distance((i, j), dest) + next_dist
                     
-                heapq.heappush(heap, (heuristic, new_dist + dist, i, j))
+                heapq.heappush(heap, (heuristic, new_dist + dist, (i, j)))
         
         # we weren't able to reach our destination
         return -1
