@@ -7,23 +7,25 @@ class Solution:
         
         visited = {}
         
-        q = deque([(start[0], start[1], 0)])
+        start, destination = tuple(start), tuple(destination)
+		
+        q = deque([(0, start)])
         
         while q:
             q_len = len(q)
             for _ in range(q_len):
-                row, col, dist = q.popleft()
+                dist, coordinate = q.popleft()
                         
-                if (row, col) in visited and visited[(row, col)] <= dist:
+                if coordinate in visited and visited[coordinate] <= dist:
                     # we can reach this location with lower
                     # distance count
                     continue
                 
-                visited[(row, col)] = dist
+                visited[coordinate] = dist
                 
                 # go all four directions
                 for direction in directions:
-                    i, j = row, col
+                    i, j = coordinate
                     new_dist = 0
                     
                     # keep going until we hit a wall
@@ -34,11 +36,9 @@ class Solution:
                         j += direction[1]
                         new_dist += 1
                     
-                    q.append((i, j, new_dist + dist))
-                
-        dest = tuple(destination)
+                    q.append((new_dist + dist, (i, j)))
         
-        if dest in visited:
-            return visited[dest]
+        if destination in visited:
+            return visited[destination]
         else:
             return -1
