@@ -7,33 +7,32 @@ class Solution:
         
         directions = [(0, 1), (0, -1), (-1, 0), (1, 0)]
         
-        strt = tuple(start)
-        dest = tuple(destination)
+        start, destination = tuple(start), tuple(destination)
         
         visited = set()
         
-        heap = [(0, start[0], start[1])]
+        heap = [(0, start)]
         
         while heap:
-            dist, row, col = heapq.heappop(heap)
+            dist, coordinate = heapq.heappop(heap)
             
-            if (row, col) == dest:
+            if coordinate == destination:
                 # we reached our destination, return the distance
                 # directly since Dijkstra's algorithm guarantees
                 # nodes appearing in shortest distance ordering.
                 return dist
             
-            if (row, col) in visited:
+            if coordinate in visited:
                 # we've previously reached this location
                 # with Dijkstra's, it is guaranteed that we
                 # found a shorter distance to the location previously
                 continue
             
-            visited.add((row, col))
+            visited.add(coordinate)
 
             # go all four directions
             for direction in directions:
-                i, j = row, col
+                i, j = coordinate
                 new_dist = 0
 
                 # keep going until we hit a wall
@@ -44,7 +43,7 @@ class Solution:
                     j += direction[1]
                     new_dist += 1
 
-                heapq.heappush(heap, (new_dist + dist, i, j))
+                heapq.heappush(heap, (new_dist + dist, (i, j)))
         
         # we weren't able to reach our destination
         return -1
