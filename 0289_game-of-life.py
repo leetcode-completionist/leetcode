@@ -67,12 +67,12 @@ class Solution:
                         # remains alive
                         continue
                     else:
-                        # else dead will be dead
+                        # else cell will be dead
                         board[i][j] = -2
                 else:
                     # previously dead
                     if alive_neighbors == 3:
-                        # reproduction
+                        # cell will become alive
                         board[i][j] = -1
         
         # change intermediary values to their new state
