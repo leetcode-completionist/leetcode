@@ -5,6 +5,8 @@ class Solution:
     
     DEAD = set([-1, 0])
     
+    DIRS = [(-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1)]
+    
     def gameOfLife(self, board: List[List[int]]) -> None:
         """
         Do not return anything, modify board in-place instead.
@@ -14,52 +16,26 @@ class Solution:
         -1: dead cell (0) that will become alive (1)
         -2: alive cell (1) that will become dead (0)
         """
-        
         m, n = len(board), len(board[0])
         
         for i in range(m):
             for j in range(n):
                 alive_neighbors = 0
                 
-                # top left
-                if i - 1 >= 0 and j - 1 >= 0:
-                    if board[i- 1][j - 1] in Solution.ALIVE:
-                        alive_neighbors += 1
-                
-                # top
-                if i - 1 >= 0:
-                    if board[i - 1][j] in Solution.ALIVE:
-                        alive_neighbors += 1
-                        
-                # top right
-                if i - 1 >= 0 and j + 1 < n:
-                    if board[i - 1][j + 1] in Solution.ALIVE:
+                # count alive neighbors
+                for i_delta, j_delta in Solution.DIRS:
+                    x, y = i + i_delta, j + j_delta
+                    if x < 0 or x == m or y < 0 or y == n:
+                        # out of bounds
+                        continue
+
+                    if board[x][y] in Solution.ALIVE:
                         alive_neighbors += 1
                         
-                # left
-                if j - 1 >= 0:
-                    if board[i][j - 1] in Solution.ALIVE:
-                        alive_neighbors += 1
-                        
-                # right
-                if j + 1 < n:
-                    if board[i][j + 1] in Solution.ALIVE:
-                        alive_neighbors += 1
-                        
-                # bottom left
-                if i + 1 < m and j - 1 >= 0:
-                    if board[i + 1][j - 1] in Solution.ALIVE:
-                        alive_neighbors += 1
-                        
-                # bottom
-                if i + 1 < m:
-                    if board[i + 1][j] in Solution.ALIVE:
-                        alive_neighbors += 1
-                        
-                # bottom right
-                if i + 1 < m and j + 1 < n:
-                    if board[i + 1][j + 1] in Solution.ALIVE:
-                        alive_neighbors += 1
+                    if alive_neighbors > 3:
+                        # already more than three
+                        # no need to count further
+                        break
                         
                 if board[i][j] == 1:
                     # previously alive
@@ -67,12 +43,12 @@ class Solution:
                         # remains alive
                         continue
                     else:
-                        # else cell will be dead
+                        # else dead will be dead
                         board[i][j] = -2
                 else:
                     # previously dead
                     if alive_neighbors == 3:
-                        # cell will become alive
+                        # reproduction
                         board[i][j] = -1
         
         # change intermediary values to their new state
@@ -82,3 +58,4 @@ class Solution:
                     board[i][j] = 0
                 elif board[i][j] == -1:
                     board[i][j] = 1
+                    
