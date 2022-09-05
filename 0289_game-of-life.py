@@ -43,7 +43,7 @@ class Solution:
                         # remains alive
                         continue
                     else:
-                        # else dead will be dead
+                        # else cell will be dead
                         board[i][j] = -2
                 else:
                     # previously dead
