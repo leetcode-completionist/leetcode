@@ -1,9 +1,6 @@
 # https://leetcode.com/problems/remove-invalid-parentheses/
 class Solution:
     def removeInvalidParentheses(self, s: str) -> List[str]:
-        if not s:
-            return [""]
-        
         def isValid(expr: str) -> bool:
             left = 0
             for c in expr:
@@ -25,11 +22,9 @@ class Solution:
         res = []
         
         visited = set()
-        
         q = deque([s])
         
         found = False
-        
         while q and not found:
             n = len(q)
             for _ in range(n):
@@ -53,8 +48,5 @@ class Solution:
                     # remove a parentheses
                     candidate = expr[:i] + expr[i + 1:]
                     q.append(candidate)
-        
-        if not res:
-            return [""]
         
         return res
