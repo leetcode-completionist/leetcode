@@ -23,7 +23,7 @@ class Solution:
         # the current performance
         total_speed = 0
         
-        for i, (curr_speed, curr_efficiency) in enumerate(engineers):
+        for curr_speed, curr_efficiency in engineers:
             total_speed += curr_speed
             heapq.heappush(speed_heap, curr_speed)
 
