@@ -3,9 +3,8 @@ class Solution:
     def bagOfTokensScore(self, tokens: List[int], power: int) -> int:
         tokens.sort()
         
-        res = 0
-        score, l, r = 0, 0, len(tokens) - 1
-        
+        score = 0
+        l, r = 0, len(tokens) - 1
         while l <= r:
             left, right = tokens[l], tokens[r]
             
@@ -14,11 +13,8 @@ class Solution:
                 score += 1
                 power -= left
                 l += 1
-                
-                # keep track of largest score we've seen so far
-                res = max(res, score) 
             
-            elif score > 0:
+            elif score > 0 and l < r:
                 # greedily play the token face down
                 score -= 1
                 power += right
@@ -28,4 +24,4 @@ class Solution:
                 # unable to play a token, break
                 break
         
-        return res
+        return score
