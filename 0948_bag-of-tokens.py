@@ -4,9 +4,7 @@ class Solution:
         tokens.sort()
         
         res = 0
-        
-        score = 0
-        l, r = 0, len(tokens) - 1
+        score, l, r = 0, 0, len(tokens) - 1
         
         while l <= r:
             left, right = tokens[l], tokens[r]
@@ -15,14 +13,15 @@ class Solution:
                 # greedily play the token face up
                 score += 1
                 power -= left
-                res = max(res, score)
                 l += 1
+                
+                # keep track of largest score we've seen so far
+                res = max(res, score) 
             
             elif score > 0:
                 # greedily play the token face down
                 score -= 1
                 power += right
-                res = max(res, score)
                 r -= 1
             
             else:
