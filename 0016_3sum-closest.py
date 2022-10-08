@@ -1,7 +1,8 @@
+# https://leetcode.com/problems/3sum-closest/
 class Solution:
     def threeSumClosest(self, nums: List[int], target: int) -> int:
         nums = sorted(nums)
-        
+
         res = 0
         diff = float('inf')
         for i in range(0, len(nums) - 2):
@@ -12,18 +13,23 @@ class Solution:
                 if total == target:
                     # target found, return immediately
                     return target
-                
+
                 # check if we found a closer sum
                 n_diff = abs(total - target)
                 if n_diff < diff:
                     res = total
                     diff = n_diff
-                
+
                 if total > target:
                     # too big, move right pointer
                     r -= 1
+                    while l < r and nums[r] == nums[r + 1]:
+                        r -= 1
+                    
                 else:
                     # too small, move left pointer
                     l += 1
+                    while l < r and nums[l] == nums[l - 1]:
+                        l += 1
 
         return res
