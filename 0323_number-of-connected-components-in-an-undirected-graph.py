@@ -4,6 +4,7 @@ class Solution:
         parents = {}
         children = defaultdict(set)
         for i in range(n):
+            # initialize parents/children maps
             parents[i] = i
             children[i].add(i)
             
@@ -17,12 +18,15 @@ class Solution:
                 large, small = small, large
                 
             for child in children[small]:
+                # merge smaller to larger
                 parents[child] = large
                 children[large].add(child)
-                
+            
+            # evict "smaller" component
             del children[small]
 
         for a, b in edges:
+            # connect components
             union(a, b)
 
         return len(children)
