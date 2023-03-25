@@ -14,8 +14,7 @@ class Solution:
                 cluster = Cluster()
                 cluster.nodes.add(a)
                 cluster.nodes.add(b)
-                nodes[a] = cluster
-                nodes[b] = cluster
+                nodes[a] = nodes[b] = cluster
             elif a not in nodes:
                 # add to cluster b
                 nodes[b].nodes.add(a)
@@ -29,10 +28,6 @@ class Solution:
                 for node_id in nodes[b].nodes:
                     nodes[a].nodes.add(node_id)
                     nodes[node_id] = nodes[a]
-            else:
-                # already the same
-                nodes[a].nodes.add(b)
-                nodes[b].nodes.add(a)
         
         # Array of clusters and count
         cluster_counts = []
